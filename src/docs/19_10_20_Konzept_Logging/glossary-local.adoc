@@ -1,0 +1,10 @@
+[glossary]
+== Glossar
+
+[id="IFS",reftext="IsyFact Standard"]
+IsyFact Standard:: 
+Die IsyFact-Standards bilden das architektonische, technologische & methodische Fundament der Isy-Fact.  
+
+[id="IFE",reftext="IsyFact Erweiterungen"]
+IsyFact Erweiterungen:: 
+IsyFact-Erweiterungen sind optionale wiederverwendbare Lösungen verschiedener Problemstellun-gen.

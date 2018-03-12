@@ -1,0 +1,8 @@
+**Dokumentinformationen**
+
+|====
+|Dokumenten-ID:| Task_Scheduling_Konzept
+|====
+
+//|Datum |Version |Änderungsgrund
+//|28.07.2017 |0.1 |initiale Version

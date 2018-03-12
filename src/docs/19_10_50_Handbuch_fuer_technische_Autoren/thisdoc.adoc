@@ -1,0 +1,24 @@
+[[einleitung]]
+= Einleitung
+
+IsyFact bietet eine geordnete Sammlung vielfältiger Dokumente, um die Entwicklung von IsyFact-basierenden Anwendungen zu beschreiben.
+Für jeden Teilbereich, sei es für den Einstieg bis hin zur Nutzungsvorgabe einzelner Module, wird jeweils ein eigenes Dokument bereitgestellt.
+Zur Vereinheitlichung werden alle Dokumente gemäß festgelegten Regeln und nach einem bestimmten Grundschema angefertigt.
+Beispielsweise zeichnet sich jedes Dokument durch einen ähnlichen Aufbau aus, um dem Nutzer eine intuitive Handhabe zu gewährleisten.
+
+Weil IsyFact häufig aktualisiert wird, müssen regelmäßig entsprechende Änderungen in die vorhandenen Dokumente eingepflegt werden.
+Hinzu kommt, dass wiederkehrend neue IsyFact-Module hinzukommen, sodass auch stetig neue Dokumente zur Gesamtdokumentation beigefügt werden müssen.
+Die spezifizierte Form muss in der vorhandenen Ordnung eingehalten werden.
+Daher sollen nicht nur vorhandene Dokumente, sondern auch neue Dokumente dem gleichen, festgelegten Grundschema gerecht werden.
+
+[[aufbau-und-zweck-des-dokuments]]
+= Aufbau und Zweck des Dokuments
+
+Dieses Handbuch dient dem technischen Autor von IsyFact-Dokumenten als Wegweiser.
+Das Ziel ist eine Anleitung die es ihm ermöglicht, die vorhandene IsyFact-Dokumentation gemäß den vereinbarten Vorgaben zu aktualisieren und zu erweitern.
+
+Es wird erläutert::
+- die Einrichtung der Werkzeuge
+- das Anlegen neuer Dokumente
+- das Bearbeiten existierender Dokumente
+- das Editieren des Glossars und des Literaturverzeichnisses

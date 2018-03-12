@@ -1,0 +1,36 @@
+
+ifdef::backend-html5[]
+
+[title="{Mydoctitle}"]
+****
+
+[.float-group]
+--
+[role="left"]
+image::../../common/images/IsyFact-Logo.png[width=270]
+[.left]
+image::../../common/images/BVA-Mirror.png[width=270]
+[.right]
+image::../../common/images/BVA-Logo.png[width=270]
+--
+Version: {Myrevnumber} +
+Datum: {myrevdate} +
+
+****
+
+endif::[]
+
+****
+image::../../common/images/CC-BY.png[ccby,align="center"]
+Dieses Dokument des Bundesverwaltungsamts ist lizenziert unter einer +
+Creative Commons Namensnennung 4.0 International Lizenz. +
+Die Lizenzbestimmungen können unter folgender URL heruntergeladen werden:
+http://creativecommons.org/licenses/by/4.0
+****
+
+*Ansprechpartner:* +
+
+Referat Z II 2  +
+{orgname} +
+E-Mail: {email} +
+Internet: {homepage}

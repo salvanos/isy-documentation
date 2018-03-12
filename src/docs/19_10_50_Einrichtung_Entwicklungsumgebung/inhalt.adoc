@@ -1,0 +1,257 @@
+[[generierung-von-boilerplate-code]]
+= Generierung von Boilerplate Code
+
+[[die-equals-und-hashcode-methode]]
+== Die equals() und hashCode() Methode
+
+Alle Klassen leiten sich von der Basisklasse Object ab und erben von dieser die Methoden `equals()`, `hashCode()`, `toString()`, `clone()` und `finalize()`. Diese Methoden sind bewusst
+als _non-final_ Methoden angelegt, damit diese Methoden klassenspezifisch angepasst werden können.
+
+Die von der Klasse `Object` vererbte Implementierung für die Methoden `equals()` und `hashCode()` stellt nur eine Basisimplementierung dar, die für die meisten Klassen genügt.
+Für andere Klassen ist diese Basisimplementierung jedoch zu unspezifisch und kann, wenn der Code der Methoden nicht auf die Klasse angepasst wird, zu schwer identifizierbaren Fehlern führen.
+
+Die Programmierung der `equals()` und `hashCode()` Methode ist nicht trivial, da ein „general contract“ (Reflexivity, Symmetry, Transitivity, Consistency und Non-nullity)
+einzuhalten ist <<Bloch2008>>.
+
+Eine Unterstützung bei der Codegenerierung erhält der Programmentwickler bei Einsatz von IntelliJ IDEA programmseitig.
+Um bei der derzeit aktuellen Eclipse Version _Neon_ identische Umsetzungen der beiden Methode zu generieren, wird das Plugin _jenerate_ verwendet.
+
+[[eclipse-boilerplate-code-plugin-jenerate]]
+== Eclipse Boilerplate Code Plugin _jenerate_
+[[installation]]
+=== Installation
+
+Das Eclipse Plugin _jenerate_ kann innerhalb von Eclipse über den _„Eclipse Marketplace“_ heruntergeladen und installiert werden.
+
+Eclipse Menüpunkt: _Help_ -> _Eclipse Marketplace_
+
+:desc-image-eclipse-marketplace-pluginauswahl: Eclipse Marketplace, Pluginauswahl
+[id="image-eclipse-marketplace-pluginauswahl",reftext="{figure-caption} {counter:figures}"]
+.{desc-image-eclipse-marketplace-pluginauswahl}
+image::Einrichtung_Entwicklungsumgebung_001.png[align="center",width=80%,pdfwidth=80%]
+
+[[grundkonfiguration]]
+=== Grundkonfiguration
+
+Bestimmte Einstellungen zur Steuerung der Erzeugung von Boilerplate Code können bei Eclipse über
+
+_Window_ -> _Preferences_ -> _Java_ -> _Jenerate_
+
+vorgenommen werden.
+
+Der folgende Screenshot zeigt die Einstellungen, die bei der Boilerplate-Code-Erstellung eine hohe Übereinstimmung mit dem von IntelliJ IDEA erzeugten Boilerplate Code ergibt.
+
+:desc-image-jenerate-grundeinstellungen: Eclipse Plugin jenerate - Grundeinstellungen
+[id="image-jenerate-grundeinstellungen",reftext="{figure-caption} {counter:figures}"]
+.{desc-image-jenerate-grundeinstellungen}
+image::Einrichtung_Entwicklungsumgebung_002.png[align="center"]
+
+[[boilerplate-code-erzeugen]]
+== Boilerplate Code erzeugen
+
+Die Generierung von Boilerplate Code selbst ist intuitiv und erfolgt in drei Schritten.
+
+* Schritt 1: Klasse erzeugen
++
+Zunächst ist die Klasse mit allen Klassenvariablen anzulegen.
+
+* Schritt 2: Tastatur Shortcut Codes eingeben
++
+Im Codeeditor der Klasse kann man nun die Tastenkombination
++
+[frame="none"]
+|====
+^|Alt + Shift + G
+|====
++
+eingeben.
++
+Es erscheint ein kleines Auswahlmenü, auf dem man sich für die Erzeugung des Boilerplate Codes für eine der Methoden (`compareTo()`, `equals()` und `hashCode()`, `toString()`) entscheiden kann.
++
+:desc-image-jenerate-methodenauswahl: Plugin jenerate - Methodenauswahl
+[id="image-jenerate-methodenauswahl",reftext="{figure-caption} {counter:figures}"]
+.{desc-image-jenerate-methodenauswahl}
+image::Einrichtung_Entwicklungsumgebung_003.png[align="center"]
++
+Alternativ kann man auch mit Tastaturkürzeln arbeiten: ::
++
+* `hashCode()` und `equals()` Alt + Shift + G dann H
+* `toString()` Alt + Shift + G dann S
+* `compareTo()` Alt + Shift + G dann C
+
+* Schritt 3: Klassenvariablen auswählen
++
+Nach Auswahl der zu erzeugenden Methode im letzten Schritt öffnet sich ein Auswahlfenster, auf dem man aus der Menge der im ersten Schritt angelegten Klassenvariablen
+diejenigen auswählen kann, die bei der Codegenerierung in die `equals()` und `hashCode()` Methode als Parameter einfließen sollen.
+
+Sollte sich zu einem späteren Zeitpunkt ergeben, dass die Klasse noch um weitere Klassenvariablen ergänzt werden muss, die zumindest teilweise bei der Codegenerierung
+berücksichtigt werden sollen, so kann der erzeugte Methodencode jederzeit wieder gelöscht und erneut erzeugt werden.
+
+[[content-strategy-boilerplate-code]]
+== Content Strategy Boilerplate Code
+
+Bei der Boilerplate-Code-Generierung für die `equals()` und `hashCode()` Methoden kann man bei beiden IDEs zwischen verschiedenen Utility-Bibliotheken (__Commons Lang__,
+__Guava__, …) und _java.util.Objects_ wählen.
+
+Um bei beiden IDEs die gleiche Basis zu verwenden, ist jeweils die *Generierung mit _java.util.Objects_* auszuwählen.
+
+[[eclipse]]
+=== Eclipse
+
+Über das Settingsmenü des Eclipse Plugins _jenerate_ lässt sich die Grundeinstellung der „__Content strategy__“ festlegen.
+
+In dieser Grundeinstellungsmaske ist _java.util.Objects_ als zu verwendendes Codegenerierungsgrundobjekt auszuwählen.
+
+Wenn man sich im Klasseneditor über das Plugin _jenerate_ die `equals()`/`hashCode()`-Methoden generieren lässt (Alt + Shift + G), wird auf der Detailmaske zur Eingabe der
+zu verwendenden Parameter bei der Codegenerierung die in den Settings voreingestellte „__Content strategy__“ angezeigt.
+
+Sollte in der _jenerate_ Grundeinstellungsmaske keine Vorauswahl oder eine andere Bildungsvorauswahl getroffen worden sein, so kann hier die zu verwendende
+Generierungsstrategie auf `USE_JAVA` (__java.util.Objects__) umgestellt werden.
+
+:desc-image-Eclipse-Boilerplate: Eclipse Boilerplate Code Bildungsstrategie
+[id="image-Eclipse-Boilerplate",reftext="{figure-caption} {counter:figures}"]
+.{desc-image-Eclipse-Boilerplate}
+image::Einrichtung_Entwicklungsumgebung_004.png[pdfwidth=40%,width=40%, align="center"]
+
+[[intellij-idea]]
+=== IntelliJ IDEA
+
+Auch bei IntelliJ IDEA lässt sich die Codebildungsstrategie auswählen.
+Diese ist im Generierungsdialog unter „Template“ einzustellen.
+
+:desc-image-IntelliJ-Boilerplate: IntelliJ IDEA Boilerplate Code Bildungsstrategie
+[id="image-IntelliJ-Boilerplate",reftext="{figure-caption} {counter:figures}"]
+.{desc-image-IntelliJ-Boilerplate}
+image::Einrichtung_Entwicklungsumgebung_005.png[align="center",width=70%,pdfwidth=70%]
+
+[[formatierung-von-quellcode]]
+= Formatierung von Quellcode
+
+[[konfiguration]]
+== Konfiguration
+
+[[konfiguration-des-formatierungsstils]]
+=== Konfiguration des Formatierungsstils
+
+Die Code-Formatierungsregeln sind bei beiden IDEs (Eclipse und IntelliJ IDEA) über Konfigurationsmasken individuell einstellbar.
+Es besteht die Möglichkeit, die Formatierungsregeln als XML-Datei abzuspeichern bzw.
+vorhandene Formatierungsregeldateien zu importieren.
+
+Zu den Formatierungskonfigurationsmasken gelangt man über folgende Menüeinträge:
+
+* **Eclipse**: _Window_ -> _Preferences_ -> _Java_ -> _Code Style_ ->  _Formatter_
+* **IntelliJ IDEA**: _File_ -> _Settings_ -> _Editor_ -> _Code Style_ -> _Java_
+
+[[tastaturkuerzel-codeformatierung]]
+=== Tastaturkürzel Codeformatierung
+
+Wenn man sich innerhalb eines Codefensters befindet, kann man mit folgenden Tastaturkürzeln die Code-Formatierung anstoßen.
+
+* **Eclipse**: Alt + Shift + F
+* **IntelliJ IDEA**: Strg + Alt + L
+
+[[import-von-code-style-formatierungsdateien]]
+=== Import von Code Style Formatierungsdateien
+
+In diesem Kapitel wird für die beiden meistverwendeten Entwicklungsumgebungen die Installation von Code Style Formatter Dateien erläutert.
+
+[[intellij-idea-1]]
+==== IntelliJ IDEA
+
+Die in dieser Installationsbeschreibung erstellten Screenshots basieren auf der IntelliJ IDEA Version 2017.2.
+
+Schritt 1: Konfigurationsmaske öffnen
+
+* Menüeintrag _File_ -> _Settings_ -> _Code Style_ -> _Java_
+
+Schritt 2: Import der Code-Formatter XML-Datei
+
+* Dropdown-Icon Einstellungen anklicken image:Einrichtung_Entwicklungsumgebung_005b.png[width=5%,pdfwidth=5%]
+* _Import Scheme_ -> _Intellij IDEA code style XML_ auswählen
+* In der daraufhin erscheinenden Dateiauswahlbox die zu importierende Datei auswählen
+
+:desc-image-Code-Formatter: IntelliJ IDEA Code Formatter Import
+[id="image-Code-Formatter",reftext="{figure-caption} {counter:figures}"]
+.{desc-image-Code-Formatter}
+image::Einrichtung_Entwicklungsumgebung_006.png[align="center"]
+
+Anmerkung: Der Name der Datei kann vom Scheme-Namen abweichen.
+Welcher Scheme-Name angezeigt wird, entscheidet sich durch einen entsprechenden Namens-Tag innerhalb der importierten XML-Datei.
+
+[[eclipse-1]]
+==== Eclipse
+
+Die in dieser Installationsbeschreibung erstellten Screenshots basieren auf der Eclipse Version __Neon__.
+
+Schritt 1: Konfigurationsmaske öffnen
+
+* Menüeintrag Window -> Preferences -> Java -> Code Style -> Formatter
+
+Schritt 2: Import der Code-Formatter XML-Datei
+
+* Schaltfläche „Import“ anklicken
+* in der daraufhin erscheinenden Dateiauswahlbox die zu importierende Datei auswählen
+
+:desc-image-Code-Formatter2: Eclipse Code Formatter Import
+[id="image-Code-Formatter2",reftext="{figure-caption} {counter:figures}"]
+.{desc-image-Code-Formatter2}
+image::Einrichtung_Entwicklungsumgebung_007.png[align="center"]
+
+Anmerkung: Der Name der Datei kann vom Formatter Active-Profile-Namen abweichen.
+Welcher Active-Profile-Name angezeigt wird, entscheidet sich durch einen entsprechenden Namens-Tag innerhalb der importierten XML-Datei.
+
+[[formatierungsdifferenzen]]
+== Formatierungsdifferenzen
+
+Mit Hilfe der Einstellungsmasken für die Formatierung bei den beiden IDEs ist eine fast vollständige Übereinstimmung bei der automatischen Formatierung des Quellcodes möglich.
+
+In diesem Kapitel werden die festgestellten, noch verbliebenen Differenzen aufgeführt.
+Für den Formatierungsvergleich diente eine Zusammenstellung von Formatierung-Demo-Codeschnipseln aus der Eclipse Formatierung-Einstellungsmaske.
+
+:desc-image-Democode: Democode zur Veranschaulichung von Formatierungseinstellungen (Eclipse)
+[id="image-Democode",reftext="{figure-caption} {counter:figures}"]
+.{desc-image-Democode}
+image::Einrichtung_Entwicklungsumgebung_008.png[align="center"]
+
+[[leere-zeilen-vor-dem-ende-des-kommentarblocks]]
+===  Leere Zeilen vor dem Ende des Kommentarblocks
+
+Im _javadoc_ Bereich löscht IntelliJ IDEA leere *-Zeilen, die vor dem Ende des Kommentarblocks stehen:
+
+:desc-image-Formatierungsdifferenz: Formatierungsdifferenz Kommentarleerzeile
+[id="image-Formatierungsdifferenz",reftext="{figure-caption} {counter:figures}"]
+.{desc-image-Formatierungsdifferenz}
+image::Einrichtung_Entwicklungsumgebung_009.png[align="center"]
+
+*Bewertung:* Da IntelliJ die Zeilen zwar löscht, aber Eclipse diese nicht wieder hinzufügt, dürfte sich dieser Formatierungsunterschied entweder durch manuelle Korrektur
+Eclipse-seitig oder durch das Einchecken des formatierten Quellcodes durch einen IntelliJ IDEA Programmierer bereinigen lassen.
+
+[[leerzeilen-bei-for-schleifen-semikolon]]
+=== Leerzeilen bei `for`-Schleifen Semikolon
+
+Bei beiden Formattern ist einstellbar, dass nach dem Semikolon in einer for-Schleife ein Leerzeichen stehen soll.
+
+Bei IntelliJ IDEA wird diese Regel streng umgesetzt, auch bei `for(;;)`.  Bei Eclipse nur, wenn hinter dem Semikolon noch ein Ausdruck wie beispielsweise `„b > i“` steht.
+
+:desc-image-Formatierungsdifferenz-for: Formatierungsdifferenz Leerzeile in for-Schleife
+[id="image-Formatierungsdifferenz-for",reftext="{figure-caption} {counter:figures}"]
+.{desc-image-Formatierungsdifferenz-for}
+image::Einrichtung_Entwicklungsumgebung_010.png[align="center"]
+
+*Bewertung:*
+
+Ein leeres Abbruchkriterium in der `for`-Schleife mag ein Testfall für eine Formatierungsprüfung sein, darf und sollte in der Programmierpraxis jedoch nicht vorkommen.
+
+[[behandlung-von-leeren-statements]]
+=== Behandlung von leeren Statements
+
+Wenn ein leeres Statement (siehe linken Teil des Screenshots) im Code vorhanden ist, wird IntelliJ IDEA zwei Leerzeilen einfügen und das
+Semikolon beim Formatieren in eine neue Zeile setzen.
+
+:desc-image-Formatierungsdifferenz-befehlszeile: Formatierungsdifferenz Befehlszeilenfehler
+[id="image-Formatierungsdifferenz-befehlszeile",reftext="{figure-caption} {counter:figures}"]
+.{desc-image-Formatierungsdifferenz-befehlszeile}
+image::Einrichtung_Entwicklungsumgebung_011.png[align="center"]
+
+*Bewertung:* Ein überflüssiges, leeres Statement-Semikolon ist auffälliger, wenn es am Zeilenanfang steht.
+Aber dieser Fall ist erneut kein Formatierungsproblem, sondern ein Programmierfehler (Semikolon ist zu löschen).

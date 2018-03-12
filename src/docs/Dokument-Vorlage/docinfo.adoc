@@ -1,0 +1,14 @@
+
+**Dokumentinformationen**
+
+|====
+|Dokumenten-ID:| genaue Bezeichnung
+|====
+
+**Dokumentenhistorie**
+
+[options="header",cols="^.^4,^.^3,<.^15,^.^5"]
+|====
+|Datum |Version |Änderungsgrund |Verantwortlich
+| |0.1 |Text |Name (Firma)
+|====
